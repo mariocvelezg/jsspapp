@@ -19,3 +19,4 @@ statsmodels==0.14.0
 tenacity==8.2.3
 tzdata==2023.3
 Werkzeug==3.0.1
+gunicorn==21.2.0
