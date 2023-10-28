@@ -4,7 +4,7 @@ from flask.templating import render_template
 from werkzeug.utils import secure_filename
 import reglas
 
-UPLOAD_FOLDER = 'static/files'
+UPLOAD_FOLDER = 'static'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
