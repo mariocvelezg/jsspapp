@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <title>Prueba JSSP</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<html>
+<hr>
+<h1>Programación de Producción en Sistemas Job Shop</h1>
+<hr>
+
+<body>
+   <div class="main">
+      <form method="post" enctype="multipart/form-data" action="/">
+         <h3>Seleccione archivo de tiempos de proceso</h3>
+         <input type="file" name="archivo_tiempos">
+         <br><br>
+         <h3>Seleccione archivo de rutas de fabricación</h3>
+         <input type="file" name="archivo_rutas">
+         <br><br>
+         <input type="submit" value="Enviar">
+      </form>
+   </div>
+   
+   <div class="main">
+       {% if archivo_t %}
+           {% if archivo_r %}
+               <p>Archivos {{archivo_t}} y {{archivo_r}} subidos sastisfactoriamente!</p>
+               <form method="post" action="/solucion">
+                   <fieldset>
+                       <legend>Seleccione regla de programación:</legend>
+                       <div>
+                           <input type="radio" id="Opcion1" name="regla" value="spt" />
+                           <label for="Opcion1">SPT</label>
+                           <input type="radio" id="Opcion2" name="regla" value="mwkr" />
+                           <label for="Opcion2">MWKR</label>
+                       </div>
+                       <div>
+                           <button type="submit">Resolver</button>
+                       </div>
+                   </fieldset>
+               </form>
+           {% endif %}       
+       {% endif %}
+   </div>
+
+
+    
+        
+          
+        
+    
+
+   
+</body>
+</html>
