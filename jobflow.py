@@ -31,7 +31,7 @@ def upload_file():
                 archivo_r = secure_filename(rutas.filename)
                 rutas.save(os.path.join(app.config['UPLOAD_FOLDER'], archivo_r))
 
-    return render_template("index2.html", archivo_t=archivo_t, archivo_r=archivo_r)
+    return render_template("index.html", archivo_t=archivo_t, archivo_r=archivo_r)
 
 @app.route('/solucion', methods=['GET', 'POST'])
 def muestra_Sol():
