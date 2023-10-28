@@ -1,5 +1,17 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  background-color: #fff5ee;
+  color: #191970;
+}
+
 h1 {
-   text-align: left;
+   text-align: left
+   color: #efa82e;
 }
 
 .main {
