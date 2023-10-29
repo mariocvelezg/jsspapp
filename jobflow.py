@@ -37,8 +37,36 @@ def upload_file():
 def muestra_Sol():
     if request.method == 'POST':
         global archivo_t, archivo_r
-        tiempos_proceso =  [[float(i) for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
-        rutas_produccion = [[int(i)-1 for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+        try:
+            # archivo separado por tabuladores
+            tiempos_proceso =  [[float(i) for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
+        except:
+            pass
+        try:
+            # archivo separado por comas
+            tiempos_proceso =  [[float(i) for i in linea.strip().split(',')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
+        except:
+            pass
+        try:
+            # archivo separado por espacios
+            tiempos_proceso =  [[float(i) for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
+        except:
+            pass
+        try:
+            # archivo separado por tabuladores
+            rutas_produccion = [[int(i)-1 for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+        except:
+            pass
+        try:
+            # archivo separado por comas
+            rutas_produccion = [[int(i)-1 for i in linea.strip().split(',')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+        except:
+            pass
+        try:
+            # archivo separado por espacios
+            rutas_produccion = [[int(i)-1 for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+        except:
+            pass
         regla = request.form['regla']
         if regla == 'spt':  
             Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
