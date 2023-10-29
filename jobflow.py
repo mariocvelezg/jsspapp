@@ -70,10 +70,12 @@ def muestra_Sol():
         regla = request.form['regla']
         if regla == 'spt':  
             Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
+            reglas.imprime_gantt(rutas_produccion, resultado)
         elif regla == 'mwkr':
             Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
-        gantt = reglas.imprime_gantt(rutas_produccion, resultado)
-    return render_template("gantt.html", regla=regla)
+            reglas.imprime_gantt(rutas_produccion, resultado)
+            
+    return render_template("gantt.html")
 
 if __name__ == '__main__':
     app.run(debug = True)
