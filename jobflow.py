@@ -35,9 +35,8 @@ def upload_file():
 @app.route('/solucion', methods=['GET', 'POST'])
 def muestra_Sol():
     global archivo_t, archivo_r
-    regla= ''
+    regla = request.form['regla']
     if request.method == 'POST':
-        regla = request.form['regla']
         if archivo_t != '' and archivo_r != '':
             try:
                 # archivo separado por tabuladores
@@ -69,7 +68,7 @@ def muestra_Sol():
                 rutas_produccion = [[int(i)-1 for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
             except:
                 pass
-            
+        
             if regla == 'spt':  
                 Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
             elif regla == 'mwkr':
@@ -77,8 +76,8 @@ def muestra_Sol():
             reglas.imprime_gantt(rutas_produccion, resultado)
             return render_template("gantt.html")
         else:
+            archivo_t, archivo_r = '', ''
             return render_template("index.html")
-        #archivo_t, archivo_r = '', ''
     
 
 if __name__ == '__main__':
