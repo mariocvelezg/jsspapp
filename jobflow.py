@@ -14,9 +14,8 @@ archivo_t, archivo_r = '', ''
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
-    
+    global archivo_t, archivo_r
     if request.method == 'POST':
-        global archivo_t, archivo_r
         if archivo_t == '' and archivo_t == '':
             tiempos = request.files["archivo_tiempos"]
             rutas = request.files["archivo_rutas"]
@@ -35,8 +34,8 @@ def upload_file():
 
 @app.route('/solucion', methods=['GET', 'POST'])
 def muestra_Sol():
+    global archivo_t, archivo_r
     if request.method == 'POST':
-        global archivo_t, archivo_r
         if archivo_t != '' and archivo_t != '':
             try:
                 # archivo separado por tabuladores
