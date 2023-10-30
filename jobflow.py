@@ -37,7 +37,8 @@ def muestra_Sol():
     global archivo_t, archivo_r
     regla= ''
     if request.method == 'POST':
-        if archivo_t != '' and archivo_t != '':
+        regla = request.form['regla']
+        if archivo_t != '' and archivo_r != '':
             try:
                 # archivo separado por tabuladores
                 tiempos_proceso =  [[float(i) for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
@@ -68,14 +69,17 @@ def muestra_Sol():
                 rutas_produccion = [[int(i)-1 for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
             except:
                 pass
-        regla = request.form['regla']
-        if regla == 'spt':  
-            Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
-        elif regla == 'mwkr':
-            Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
-        reglas.imprime_gantt(rutas_produccion, resultado)
+            
+            if regla == 'spt':  
+                Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
+            elif regla == 'mwkr':
+                Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
+            reglas.imprime_gantt(rutas_produccion, resultado)
+            return render_template("gantt.html")
+        else:
+            return render_template("index.html")
         #archivo_t, archivo_r = '', ''
-    return render_template("gantt.html")
+    
 
 if __name__ == '__main__':
     app.run()
