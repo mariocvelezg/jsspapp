@@ -37,45 +37,45 @@ def upload_file():
 def muestra_Sol():
     if request.method == 'POST':
         global archivo_t, archivo_r
-        try:
-            # archivo separado por tabuladores
-            tiempos_proceso =  [[float(i) for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
-        except:
-            pass
-        try:
-            # archivo separado por comas
-            tiempos_proceso =  [[float(i) for i in linea.strip().split(',')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
-        except:
-            pass
-        try:
-            # archivo separado por espacios
-            tiempos_proceso =  [[float(i) for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
-        except:
-            pass
-        try:
-            # archivo separado por tabuladores
-            rutas_produccion = [[int(i)-1 for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
-        except:
-            pass
-        try:
-            # archivo separado por comas
-            rutas_produccion = [[int(i)-1 for i in linea.strip().split(',')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
-        except:
-            pass
-        try:
-            # archivo separado por espacios
-            rutas_produccion = [[int(i)-1 for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
-        except:
-            pass
-        regla = request.form['regla']
-        if regla == 'spt':  
-            Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
+        if archivo_t != '' and archivo_t != '':
+            try:
+                # archivo separado por tabuladores
+                tiempos_proceso =  [[float(i) for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
+            except:
+                pass
+            try:
+                # archivo separado por comas
+                tiempos_proceso =  [[float(i) for i in linea.strip().split(',')] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
+            except:
+                pass
+            try:
+                # archivo separado por espacios
+                tiempos_proceso =  [[float(i) for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_t,'r')]
+            except:
+                pass
+            try:
+                # archivo separado por tabuladores
+                rutas_produccion = [[int(i)-1 for i in linea.strip().split('\t')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+            except:
+                pass
+            try:
+                # archivo separado por comas
+                rutas_produccion = [[int(i)-1 for i in linea.strip().split(',')] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+            except:
+                pass
+            try:
+                # archivo separado por espacios
+                rutas_produccion = [[int(i)-1 for i in linea.strip().split()] for linea in open(UPLOAD_FOLDER+'/'+archivo_r,'r')]
+            except:
+                pass
+            regla = request.form['regla']
+            if regla == 'spt':  
+                Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
+            elif regla == 'mwkr':
+                Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
             reglas.imprime_gantt(rutas_produccion, resultado)
-        elif regla == 'mwkr':
-            Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
-            reglas.imprime_gantt(rutas_produccion, resultado)
-            
+            archivo_t, archivo_r = '', ''
     return render_template("gantt.html")
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run()
