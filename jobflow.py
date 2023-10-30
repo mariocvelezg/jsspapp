@@ -35,6 +35,7 @@ def upload_file():
 @app.route('/solucion', methods=['GET', 'POST'])
 def muestra_Sol():
     global archivo_t, archivo_r
+    regla= ''
     if request.method == 'POST':
         if archivo_t != '' and archivo_t != '':
             try:
@@ -72,8 +73,8 @@ def muestra_Sol():
             Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
         elif regla == 'mwkr':
             Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
-            reglas.imprime_gantt(rutas_produccion, resultado)
-            archivo_t, archivo_r = '', ''
+        reglas.imprime_gantt(rutas_produccion, resultado)
+        #archivo_t, archivo_r = '', ''
     return render_template("gantt.html")
 
 if __name__ == '__main__':
