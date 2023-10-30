@@ -35,8 +35,9 @@ def upload_file():
 @app.route('/solucion', methods=['GET', 'POST'])
 def muestra_Sol():
     global archivo_t, archivo_r
-    regla = request.form['regla']
+    
     if request.method == 'POST':
+        regla = request.form['regla']
         if archivo_t != '' and archivo_r != '':
             try:
                 # archivo separado por tabuladores
