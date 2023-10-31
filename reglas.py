@@ -137,4 +137,6 @@ def imprime_gantt(rutas, prog):
     fig.update_yaxes(title='', autorange="reversed", categoryorder='category ascending')
     fig.update_xaxes(title='Tiempo')
     fig.update_traces(hovertemplate=hovertemp)
-    fig.write_html('templates/gantt.html')
+    return fig
+    #print('hello!!!!!')
+    #fig.write_html('./templates/gantt.html')

@@ -2,6 +2,7 @@ import os
 from flask import Flask, request
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
+import plotly.express as px
 import reglas
 
 UPLOAD_FOLDER = 'static'
@@ -34,6 +35,7 @@ def upload_file():
 
 @app.route('/solucion', methods=['GET', 'POST'])
 def muestra_Sol():
+    
     global archivo_t, archivo_r
     
     if request.method == 'POST':
@@ -74,12 +76,12 @@ def muestra_Sol():
                 Cmax, resultado = reglas.spt_rule(tiempos_proceso, rutas_produccion)
             elif regla == 'mwkr':
                 Cmax, resultado = reglas.mwkr_rule(tiempos_proceso, rutas_produccion)
-            reglas.imprime_gantt(rutas_produccion, resultado)
-            return render_template("gantt.html")
+            gantt_chart = reglas.imprime_gantt(rutas_produccion, resultado)
+            gantt_chart.write_html('./templates/gantt_'+str(Cmax)+'.html')
+            return render_template('gantt_'+str(Cmax)+'.html')
         else:
             archivo_t, archivo_r = '', ''
             return render_template("index.html")
     
-
 if __name__ == '__main__':
     app.run()
