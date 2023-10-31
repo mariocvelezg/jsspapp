@@ -33,7 +33,6 @@ def upload_file():
     elif request.method == 'GET':
         archivo_t, archivo_r = '', ''
 
-
     return render_template("index.html", archivo_t=archivo_t, archivo_r=archivo_r)
 
 @app.route('/solucion', methods=['GET', 'POST'])
