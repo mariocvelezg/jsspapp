@@ -1,7 +1,6 @@
 import os
 from flask import Flask, request
 from flask.templating import render_template
-from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
 #import plotly.express as px
 import reglas
@@ -9,14 +8,9 @@ import reglas
 UPLOAD_FOLDER = 'static'
 
 app = Flask(__name__)
-scheduler = APScheduler()
+
 app.config['SECRET_KEY'] = 'secret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-def borar_archivos():
-    for document in os.listdir('./static/'):
-        if not document.startswith('style'):
-            os.remove('./static/' + document)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -98,8 +92,13 @@ def muestra_Sol():
         else:
             archivo_t, archivo_r = '', ''
             return render_template("index.html")
+
+@app.route('/borrarArchivos', methods = ['GET', 'POST'])
+def borar_archivos():
+    for document in os.listdir('./static/'):
+            if not document.startswith('style'):
+                os.remove('./static/' + document)
+    return 'Archivos de texto borrados correctamente'
     
 if __name__ == '__main__':
-    scheduler.add_job(id = 'Scheduled Task', func=borar_archivos, trigger="interval", hours=24)
-    scheduler.start()
     app.run()
