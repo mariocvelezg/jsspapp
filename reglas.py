@@ -1,7 +1,7 @@
 import plotly.express as px
 
 def spt_rule(tiempos, rutas):
-       
+    
     # Inicializar Variable
     n = len(tiempos)                     # Número de trabajos
     m = max([len(i) for i in rutas])     # Número de máquinas
@@ -116,7 +116,7 @@ def imprime_gantt(rutas, prog):
         duracion = [op[1]-op[0] for fila in prog for op in fila],
         fin = [op[1] for fila in prog for op in fila],
         recurso = ['Máquina 0'+str(r+1) if r<9 else 'Máquina '+str(r+1) for fila in rutas for r in fila])
-    
+    print(datos)
     hovertemp="<br>".join([
         "<b>Trabajo:</b> %{customdata[0]}",
         "<b>Operación:</b> %{customdata[1]}",

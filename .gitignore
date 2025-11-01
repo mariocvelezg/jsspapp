@@ -1,2 +1,21 @@
-myenv
-__pycache__
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+ENV/
+env/
+myenv/
+
+# Flask / local
+instance/
+*.log
+.env
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db

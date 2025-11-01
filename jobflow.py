@@ -8,7 +8,6 @@ import reglas
 UPLOAD_FOLDER = 'static'
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = 'secret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -86,6 +85,7 @@ def muestra_Sol():
             
             gantt_chart = reglas.imprime_gantt(rutas_produccion, resultado)
             gantt_chart.write_html('./templates/gantt_'+str(Cmax)+'.html')
+            #gantt_chart.write_html('./static/gantt_'+str(Cmax)+'.html')
             return render_template('gantt_'+str(Cmax)+'.html')
 
         else:
